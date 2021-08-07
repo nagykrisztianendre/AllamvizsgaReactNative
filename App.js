@@ -47,7 +47,7 @@ export default function App() {
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {!user ? (
+                {user ? (
                     <>
                         <Stack.Screen name="Home">
                             {props => <HomeScreen {...props} extraData={user}/>}
