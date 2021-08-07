@@ -1,37 +1,3 @@
-// import { StatusBar } from 'expo-status-bar';
-// import React from 'react';
-// import {Button, StyleSheet, Text, View} from 'react-native';
-// import {firebase} from "./enviroment/config";
-//
-//
-// export default function App() {
-//   return (
-//     <View style={styles.container}>
-//       <Text>Open up App.js to start working on your app!</Text>
-//       <StatusBar style="auto" />
-//   <Button onPress={()=>storeHighScore(12,1)} title={"Press me!"}/>
-//     </View>
-//   );
-// }
-//
-// function storeHighScore(userId, score) {
-//   firebase
-//       .database()
-//       .ref('users/' + userId)
-//       .set({
-//         highscore: score,
-//       });
-// }
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#fff',
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-// });
-
-
 import 'react-native-gesture-handler';
 import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -51,13 +17,42 @@ export default function App() {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
 
+    // if (loading) {
+    //     return (
+    //         <></>
+    //     );
+    // }
+
+    // useEffect(() => {
+    //     const usersRef = firebase.firestore().collection('users');
+    //     firebase.auth().onAuthStateChanged(user => {
+    //         if (user) {
+    //             usersRef
+    //                 .doc(user.uid)
+    //                 .get()
+    //                 .then((document) => {
+    //                     const userData = document.data()
+    //                     setLoading(false)
+    //                     setUser(userData)
+    //                 })
+    //                 .catch((error) => {
+    //                     setLoading(false)
+    //                 });
+    //         } else {
+    //             setLoading(false)
+    //         }
+    //     });
+    // }, []);
+
     return (
         <NavigationContainer>
             <Stack.Navigator>
-                {user ? (
-                    <Stack.Screen name="Home">
-                        {props => <HomeScreen {...props} extraData={user} />}
-                    </Stack.Screen>
+                {!user ? (
+                    <>
+                        <Stack.Screen name="Home">
+                            {props => <HomeScreen {...props} extraData={user}/>}
+                        </Stack.Screen>
+                    </>
 
                 ) : (
                     <>
